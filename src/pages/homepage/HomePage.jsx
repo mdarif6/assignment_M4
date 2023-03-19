@@ -1,3 +1,4 @@
+import "./HomePage.css";
 import { useEffect, useState } from "react";
 import AlbumsList from "../../components/AlbumsList";
 import Button from "../../components/Button";
@@ -36,11 +37,14 @@ export default function HomePage() {
   const numberOfPages = Math.ceil(albumData.length / recordsPerPage);
   console.log(currentRecords, numberOfPages);
   return (
-    <div>
-      {albumData &&
-        currentRecords.map((item) => {
-          return <AlbumsList item={item} />;
-        })}
+    <div className="alb-homepage-wrapper">
+      <h2>LIST OF ALBUMS</h2>
+      <div className="alb-albumlist-wrapper">
+        {albumData &&
+          currentRecords.map((item) => {
+            return <AlbumsList item={item} />;
+          })}
+      </div>
 
       <Pagination
         numberOfPages={numberOfPages}

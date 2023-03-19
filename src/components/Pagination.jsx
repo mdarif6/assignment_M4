@@ -1,3 +1,4 @@
+import "./Pagination.css";
 import Button from "./Button";
 
 export default function Pagination({
@@ -18,12 +19,22 @@ export default function Pagination({
   };
 
   return (
-    <div>
-      <button onClick={prevPage}>previous</button>
+    <div className="alb-buttons-wrapper">
+      <button className="primary-btn" onClick={prevPage}>
+        previous
+      </button>
       {pageNumbers.map((item) => {
-        return <Button clickHandle={() => setCurrentPage(item)} item={item} />;
+        return (
+          <Button
+            clickHandle={() => setCurrentPage(item)}
+            item={item}
+            currentPage={currentPage}
+          />
+        );
       })}
-      <button onClick={nextPage}>Next</button>
+      <button className="primary-btn" onClick={nextPage}>
+        Next
+      </button>
     </div>
   );
 }

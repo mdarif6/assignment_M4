@@ -1,5 +1,6 @@
 .alb-card-wrapper {
-  width: 200px;
+  min-width: 550px;
   height: 100px;
-  background-color: red;
+  background-color: rgb(73, 162, 109);
+  color: white;
 }

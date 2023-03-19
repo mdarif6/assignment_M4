@@ -1,0 +1,13 @@
+.alb-buttons-wrapper {
+  display: flex;
+  margin: 1rem;
+
+  justify-content: center;
+}
+.active-btn,
+.primary-btn {
+  padding: 0.5rem 1rem;
+}
+.active-btn {
+  background-color: blue;
+}

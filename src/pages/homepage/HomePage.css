@@ -1,0 +1,8 @@
+.alb-homepage-wrapper {
+  /* text-align: center; */
+}
+.alb-albumlist-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
