@@ -1,11 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+  albumsData: [],
+};
 
 export const albumSlice = createSlice({
   name: "album",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    albumSetData: (state, action) => {
+      return { ...state, albumsData: action.payload };
+    },
+  },
 });
+
+export const { albumSetData } = albumSlice.actions;
 
 export default albumSlice.reducer;

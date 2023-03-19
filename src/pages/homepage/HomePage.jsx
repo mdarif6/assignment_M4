@@ -3,20 +3,23 @@ import { useEffect, useState } from "react";
 import AlbumsList from "../../components/AlbumsList";
 import Button from "../../components/Button";
 import Pagination from "../../components/Pagination";
+import { albumSetData } from "../../features/albumSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function HomePage() {
-  const [albumData, setAlbumData] = useState("");
+  const dispatch = useDispatch();
+  const albumData = useSelector((state) => state.albums.albumsData);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(5);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
 
-  console.log(albumData.length);
   const albumURL = "https://jsonplaceholder.typicode.com/albums/";
   function getAlbumsData() {
     fetch(albumURL)
       .then((response) => response.json())
-      .then((data) => setAlbumData(data));
+      .then((data) => dispatch(albumSetData(data)));
   }
   useEffect(() => {
     getAlbumsData();
