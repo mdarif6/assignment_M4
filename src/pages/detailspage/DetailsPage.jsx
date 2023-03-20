@@ -1,3 +1,12 @@
+import { useSelector } from "react-redux";
+
+import "./DetailsPage.css";
 export default function DetailsPage() {
-  return <div></div>;
+  const albumData = useSelector((state) => state.albums.albumsData);
+
+  return (
+    <div>
+      <h1>arif</h1>
+    </div>
+  );
 }

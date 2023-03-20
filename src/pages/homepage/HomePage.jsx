@@ -1,28 +1,51 @@
 import "./HomePage.css";
 import { useEffect, useState } from "react";
 import AlbumsList from "../../components/AlbumsList";
-import Button from "../../components/Button";
+
 import Pagination from "../../components/Pagination";
-import { albumSetData } from "../../features/albumSlice";
+import {
+  albumSetData,
+  setPhotosData,
+  setUsersData,
+} from "../../features/albumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const albumData = useSelector((state) => state.albums.albumsData);
+  const usersData = useSelector((state) => state.albums.usersData);
+  const photosData = useSelector((state) => state.albums.photosData);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(5);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-
-  const albumURL = "https://jsonplaceholder.typicode.com/albums/";
+  console.log(usersData, photosData);
+  const albumURL1 = "https://jsonplaceholder.typicode.com/albums/";
   function getAlbumsData() {
-    fetch(albumURL)
+    fetch(albumURL1)
       .then((response) => response.json())
       .then((data) => dispatch(albumSetData(data)));
   }
+
+  const albumURL2 = "http://jsonplaceholder.typicode.com/users";
+  const albumURL3 = "https://jsonplaceholder.typicode.com/albums/1/photos";
+  function getUsersData() {
+    fetch(albumURL2)
+      .then((response) => response.json())
+      .then((data) => dispatch(setUsersData(data)));
+  }
+
+  function getPhotosData() {
+    fetch(albumURL3)
+      .then((response) => response.json())
+      .then((data) => dispatch(setPhotosData(data)));
+  }
+
   useEffect(() => {
+    getPhotosData();
     getAlbumsData();
+    getUsersData();
   }, []);
 
   const getButtonForPagination = (pages, noOfHits) => {
@@ -38,7 +61,7 @@ export default function HomePage() {
 
   const currentRecords = albumData.slice(indexOfFirstRecord, indexOfLastRecord);
   const numberOfPages = Math.ceil(albumData.length / recordsPerPage);
-  console.log(currentRecords, numberOfPages);
+
   return (
     <div className="alb-homepage-wrapper">
       <h2>LIST OF ALBUMS</h2>
