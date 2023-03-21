@@ -6,7 +6,6 @@ export default function AlbumsList({ item }) {
   const usersData = useSelector((state) => state.albums.usersData);
 
   const userObject = usersData.find((user) => user.id === item.userId);
-  console.log(userObject, "suers");
 
   return (
     <div>

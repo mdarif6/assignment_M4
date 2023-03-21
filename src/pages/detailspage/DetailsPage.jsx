@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Pagination from "../../components/Pagination";
+import PhotoList from "../../components/PhotoList";
 import { setPhotosData } from "../../features/albumSlice";
 import "./DetailsPage.css";
 
@@ -13,6 +15,7 @@ export default function DetailsPage() {
   const [recordsPerPage, setRecordsPerPage] = useState(9);
   const photosData = useSelector((state) => state.albums.photosData);
   const albumData = useSelector((state) => state.albums.albumsData);
+  const usersData = useSelector((state) => state.albums.usersData);
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -28,18 +31,32 @@ export default function DetailsPage() {
       .then((response) => response.json())
       .then((data) => dispatch(setPhotosData(data)));
   }
-  console.log(albumData, "album", photosData, "photo");
+  console.log(albumData, "album", photosData, "photo", usersData, "userrrrrr");
   useEffect(() => {
     getPhotosData();
   }, []);
 
+  const albumid = albumData.map((item) => item);
+  console.log(albumid, "kkkkkkkkkk");
+  const userObject = usersData.find((user) => user.id === albumid.Id);
+  console.log(userObject, "lllllllllllllll");
   return (
     <div>
-      <h1>
-        {photosData.map((item) => {
-          return <img src={item.thumbnailUrl} alt="thumb" />;
+      <h2>TITLE OF ALBUM</h2>
+      <p>Uploaded By : {usersData.name}</p>
+      <div className="alb-photo-wrapper">
+        {currentRecords.map((item) => {
+          return <PhotoList item={item} />;
         })}
-      </h1>
+      </div>
+
+      <div>
+        <Pagination
+          numberOfPages={numberOfPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 }
