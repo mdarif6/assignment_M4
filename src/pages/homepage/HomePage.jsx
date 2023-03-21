@@ -3,11 +3,7 @@ import { useEffect, useState } from "react";
 import AlbumsList from "../../components/AlbumsList";
 
 import Pagination from "../../components/Pagination";
-import {
-  albumSetData,
-  setPhotosData,
-  setUsersData,
-} from "../../features/albumSlice";
+import { albumSetData, setUsersData } from "../../features/albumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function HomePage() {
@@ -18,9 +14,25 @@ export default function HomePage() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(5);
+
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  console.log(usersData, photosData);
+
+  console.log(albumData, "100", usersData, "user", photosData, "photo");
+
+  const thirdData = usersData.filter((elem) => {
+    return albumData.some((ele) => {
+      if (ele.id === elem.id) {
+        return elem;
+      }
+    });
+  });
+  console.log(thirdData, "third");
+  const third = thirdData.map((third) => {
+    console.log(third.name);
+  });
+  console.log(third);
+
   const albumURL1 = "https://jsonplaceholder.typicode.com/albums/";
   function getAlbumsData() {
     fetch(albumURL1)
@@ -29,21 +41,20 @@ export default function HomePage() {
   }
 
   const albumURL2 = "http://jsonplaceholder.typicode.com/users";
-  const albumURL3 = "https://jsonplaceholder.typicode.com/albums/1/photos";
+  // const albumURL3 = "https://jsonplaceholder.typicode.com/albums/1/photos";
   function getUsersData() {
     fetch(albumURL2)
       .then((response) => response.json())
       .then((data) => dispatch(setUsersData(data)));
   }
 
-  function getPhotosData() {
-    fetch(albumURL3)
-      .then((response) => response.json())
-      .then((data) => dispatch(setPhotosData(data)));
-  }
+  // function getPhotosData() {
+  //   fetch(albumURL3)
+  //     .then((response) => response.json())
+  //     .then((data) => dispatch(setPhotosData(data)));
+  // }
 
   useEffect(() => {
-    getPhotosData();
     getAlbumsData();
     getUsersData();
   }, []);
@@ -61,6 +72,20 @@ export default function HomePage() {
 
   const currentRecords = albumData.slice(indexOfFirstRecord, indexOfLastRecord);
   const numberOfPages = Math.ceil(albumData.length / recordsPerPage);
+
+  // const segregatedAlbumData = albumData.reduce((dict, data) => {
+  //   if (!dict[data.userId]) dict[data.userId] = [];
+  //   dict[data.userId].push(data);
+  //   return dict;
+  // }, []);
+
+  // console.log(segregatedAlbumData);
+
+  // segregatedAlbumData.map((item) => {
+  //   return item.map((ele) => {
+  //     console.log(ele);
+  //   });
+  // });
 
   return (
     <div className="alb-homepage-wrapper">
