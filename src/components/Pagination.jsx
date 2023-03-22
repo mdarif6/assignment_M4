@@ -1,5 +1,6 @@
 import "./Pagination.css";
 import Button from "./Button";
+import { getPagesArray } from "../utility";
 
 export default function Pagination({
   numberOfPages,
@@ -7,7 +8,8 @@ export default function Pagination({
   setCurrentPage,
 }) {
   //this array will hold all page number from 1 to n
-  const pageNumbers = [...Array(numberOfPages + 1).keys()].slice(1);
+
+  const pageNumbers = getPagesArray(numberOfPages);
 
   const nextPage = () => {
     if (currentPage !== numberOfPages) {
@@ -21,9 +23,8 @@ export default function Pagination({
   return (
     <div className="alb-buttons-wrapper">
       <button
-        className="primary-btn"
+        className={currentPage === 1 ? "disabled-btn" : "primary-btn"}
         onClick={prevPage}
-        disabled={currentPage === 1}
       >
         previous
       </button>
@@ -37,9 +38,10 @@ export default function Pagination({
         );
       })}
       <button
-        className="primary-btn"
+        className={
+          currentPage === numberOfPages ? "disabled-btn" : "primary-btn"
+        }
         onClick={nextPage}
-        disabled={currentPage === numberOfPages}
       >
         Next
       </button>

@@ -5,30 +5,15 @@ import AlbumsList from "../../components/AlbumsList";
 import Pagination from "../../components/Pagination";
 import { albumSetData, setUsersData } from "../../features/albumSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { getNumberOfPages, getPageData } from "../../utility";
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const albumData = useSelector((state) => state.albums.albumsData);
-  const usersData = useSelector((state) => state.albums.usersData);
-  const photosData = useSelector((state) => state.albums.photosData);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
-
-  const indexOfLastRecord = currentPage * recordsPerPage;
-  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-
-  const thirdData = usersData.filter((elem) => {
-    return albumData.some((ele) => {
-      if (ele.id === elem.id) {
-        return elem;
-      }
-    });
-  });
-
-  // const third = thirdData.map((third) => {
-  //   console.log(third.name);
-  // });
+  const numberOfPages = getNumberOfPages(albumData.length, 5);
+  const currentRecords = getPageData(albumData, currentPage, 5);
 
   const albumURL1 = "https://jsonplaceholder.typicode.com/albums/";
   function getAlbumsData() {
@@ -38,51 +23,16 @@ export default function HomePage() {
   }
 
   const albumURL2 = "http://jsonplaceholder.typicode.com/users";
-  // const albumURL3 = "https://jsonplaceholder.typicode.com/albums/1/photos";
   function getUsersData() {
     fetch(albumURL2)
       .then((response) => response.json())
       .then((data) => dispatch(setUsersData(data)));
   }
 
-  // function getPhotosData() {
-  //   fetch(albumURL3)
-  //     .then((response) => response.json())
-  //     .then((data) => dispatch(setPhotosData(data)));
-  // }
-
   useEffect(() => {
     getAlbumsData();
     getUsersData();
   }, []);
-
-  const getButtonForPagination = (pages, noOfHits) => {
-    let arrayOfPages = [];
-    let noOfPages = pages / noOfHits;
-    for (let i = 1; i <= noOfPages; i++) {
-      arrayOfPages.push(i);
-    }
-    return arrayOfPages;
-  };
-
-  let newArryOfPages = getButtonForPagination(100, 20);
-
-  const currentRecords = albumData.slice(indexOfFirstRecord, indexOfLastRecord);
-  const numberOfPages = Math.ceil(albumData.length / recordsPerPage);
-
-  // const segregatedAlbumData = albumData.reduce((dict, data) => {
-  //   if (!dict[data.userId]) dict[data.userId] = [];
-  //   dict[data.userId].push(data);
-  //   return dict;
-  // }, []);
-
-  // console.log(segregatedAlbumData);
-
-  // segregatedAlbumData.map((item) => {
-  //   return item.map((ele) => {
-  //     console.log(ele);
-  //   });
-  // });
 
   return (
     <div className="alb-homepage-wrapper">

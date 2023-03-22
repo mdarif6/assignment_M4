@@ -8,33 +8,36 @@ export default function AlbumsList({ item }) {
   const usersData = useSelector((state) => state.albums.usersData);
 
   const userObject = usersData.find((user) => user.id === item.userId);
-  console.log(userObject, "albm");
 
   return (
-    <div>
-      <div className="alb-card-wrapper">
-        <div className="alb-card-title">
-          <div className="alb-title-icon">
-            <p>ALBUM TITLE : {item.title}</p>{" "}
-            <Link to={`/details/${item.id}`}>
-              <button onClick={() => dispatch(setalbumItem(item))}>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </Link>
-          </div>
-          <p>USER: {userObject.name} </p>
-        </div>
-
-        <div>
+    <div className="alb-card-wrapper">
+      <div className="alb-card-title">
+        <div className="alb-title-icon">
+          <p>
+            {" "}
+            <strong> ALBUM TITLE : </strong>
+            {item.title}
+          </p>{" "}
           <Link to={`/details/${item.id}`}>
-            <button
-              className="alb-view-btn"
-              onClick={() => dispatch(setalbumItem(item))}
-            >
-              VIEW MORE
+            <button onClick={() => dispatch(setalbumItem(item))}>
+              <i class="fa-solid fa-arrow-right"></i>
             </button>
           </Link>
         </div>
+        <p>
+          <strong> USER:</strong> {userObject?.name}{" "}
+        </p>
+      </div>
+
+      <div className="alb-view-btn-wrapper">
+        <Link to={`/details/${item.id}`}>
+          <button
+            className="alb-view-btn"
+            onClick={() => dispatch(setalbumItem(item))}
+          >
+            VIEW MORE
+          </button>
+        </Link>
       </div>
     </div>
   );

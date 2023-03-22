@@ -2,6 +2,8 @@
   /* text-align: center; */
 }
 .alb-albumlist-wrapper {
+  width: 600px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

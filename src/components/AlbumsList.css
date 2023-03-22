@@ -1,6 +1,5 @@
 .alb-card-wrapper {
-  min-width: 550px;
-  height: 100px;
+  width: 100%;
   background-color: #27aa7e;
   color: white;
   display: flex;
@@ -9,6 +8,7 @@
   padding: 0 1rem;
 }
 .alb-view-btn {
+  font-weight: bold;
   background: none;
   border: none;
   color: white;
@@ -16,7 +16,7 @@
 }
 .alb-title-icon {
   display: flex;
-  justify-content: center;
+
   align-items: center;
   gap: 1rem;
 }
@@ -26,4 +26,12 @@
   color: white;
   border: 1px solid white;
   cursor: pointer;
+}
+.alb-card-title {
+  flex: 1;
+}
+
+.alb-view-btn-wrapper {
+  display: flex;
+  align-items: center;
 }
