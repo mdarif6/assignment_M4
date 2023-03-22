@@ -20,7 +20,11 @@ export default function Pagination({
 
   return (
     <div className="alb-buttons-wrapper">
-      <button className="primary-btn" onClick={prevPage}>
+      <button
+        className="primary-btn"
+        onClick={prevPage}
+        disabled={currentPage === 1}
+      >
         previous
       </button>
       {pageNumbers.map((item) => {
@@ -32,7 +36,11 @@ export default function Pagination({
           />
         );
       })}
-      <button className="primary-btn" onClick={nextPage}>
+      <button
+        className="primary-btn"
+        onClick={nextPage}
+        disabled={currentPage === numberOfPages}
+      >
         Next
       </button>
     </div>

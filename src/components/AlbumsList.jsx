@@ -13,11 +13,28 @@ export default function AlbumsList({ item }) {
   return (
     <div>
       <div className="alb-card-wrapper">
-        <p className="alb-card-title">ALBUM TITLE : {item.title}</p>
-        <p className="alb-card-username">USER:{userObject.name} </p>
-        <Link to={`/details/${item.id}`}>
-          <button onClick={() => dispatch(setalbumItem(item))}>Click</button>
-        </Link>
+        <div className="alb-card-title">
+          <div className="alb-title-icon">
+            <p>ALBUM TITLE : {item.title}</p>{" "}
+            <Link to={`/details/${item.id}`}>
+              <button onClick={() => dispatch(setalbumItem(item))}>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </Link>
+          </div>
+          <p>USER: {userObject.name} </p>
+        </div>
+
+        <div>
+          <Link to={`/details/${item.id}`}>
+            <button
+              className="alb-view-btn"
+              onClick={() => dispatch(setalbumItem(item))}
+            >
+              VIEW MORE
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -4,10 +4,35 @@
 
   justify-content: center;
 }
-.active-btn,
+
 .primary-btn {
+  margin: 0 1rem;
   padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: #2a8dce;
+  color: white;
+  border-radius: 0.6rem;
+  cursor: pointer;
 }
+
+.pagination-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .active-btn {
-  background-color: blue;
+  background-color: #2a8dce;
+  color: white;
+  border-radius: 0.6rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
 }

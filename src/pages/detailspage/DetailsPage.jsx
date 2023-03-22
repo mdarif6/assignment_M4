@@ -42,7 +42,7 @@ export default function DetailsPage() {
 
   return (
     <div>
-      <h2>TITLE OF ALBUM :{albumitem.title}</h2>
+      <h2>{albumitem.title}</h2>
       <p>Uploaded By : {userObject.name}</p>
 
       <div className="alb-photo-wrapper">

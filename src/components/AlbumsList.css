@@ -1,6 +1,29 @@
 .alb-card-wrapper {
   min-width: 550px;
   height: 100px;
-  background-color: rgb(73, 162, 109);
+  background-color: #27aa7e;
   color: white;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding: 0 1rem;
+}
+.alb-view-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.alb-title-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.alb-title-icon button {
+  height: fit-content;
+  background-color: #27aa7e;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
 }
