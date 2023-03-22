@@ -1,6 +1,6 @@
 .alb-buttons-wrapper {
   display: flex;
-  margin: 1rem;
+  padding: 1rem;
   flex-wrap: wrap;
   justify-content: center;
 }

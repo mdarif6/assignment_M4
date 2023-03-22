@@ -7,8 +7,6 @@ export default function Pagination({
   currentPage,
   setCurrentPage,
 }) {
-  //this array will hold all page number from 1 to n
-
   const pageNumbers = getPagesArray(numberOfPages);
 
   const nextPage = () => {
