@@ -4,6 +4,7 @@ const initialState = {
   albumsData: [],
   usersData: [],
   photosData: [],
+  albumitem: {},
 };
 
 export const albumSlice = createSlice({
@@ -19,9 +20,13 @@ export const albumSlice = createSlice({
     setPhotosData: (state, action) => {
       return { ...state, photosData: action.payload };
     },
+    setalbumItem: (state, action) => {
+      return { ...state, albumitem: action.payload };
+    },
   },
 });
 
-export const { albumSetData, setUsersData, setPhotosData } = albumSlice.actions;
+export const { albumSetData, setUsersData, setPhotosData, setalbumItem } =
+  albumSlice.actions;
 
 export default albumSlice.reducer;

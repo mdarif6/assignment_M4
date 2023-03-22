@@ -18,8 +18,6 @@ export default function HomePage() {
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
 
-  console.log(albumData, "100", usersData, "user", photosData, "photo");
-
   const thirdData = usersData.filter((elem) => {
     return albumData.some((ele) => {
       if (ele.id === elem.id) {
@@ -27,11 +25,10 @@ export default function HomePage() {
       }
     });
   });
-  console.log(thirdData, "third");
-  const third = thirdData.map((third) => {
-    console.log(third.name);
-  });
-  console.log(third);
+
+  // const third = thirdData.map((third) => {
+  //   console.log(third.name);
+  // });
 
   const albumURL1 = "https://jsonplaceholder.typicode.com/albums/";
   function getAlbumsData() {

@@ -16,6 +16,7 @@ export default function DetailsPage() {
   const photosData = useSelector((state) => state.albums.photosData);
   const albumData = useSelector((state) => state.albums.albumsData);
   const usersData = useSelector((state) => state.albums.usersData);
+  const albumitem = useSelector((state) => state.albums.albumitem);
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -24,26 +25,26 @@ export default function DetailsPage() {
     indexOfLastRecord
   );
   const numberOfPages = Math.ceil(photosData.length / recordsPerPage);
-  console.log(currentRecords, numberOfPages, "sdsldf");
+
   const albumURL3 = `https://jsonplaceholder.typicode.com/albums/${albumID}/photos`;
   function getPhotosData() {
     fetch(albumURL3)
       .then((response) => response.json())
       .then((data) => dispatch(setPhotosData(data)));
   }
-  console.log(albumData, "album", photosData, "photo", usersData, "userrrrrr");
+
   useEffect(() => {
     getPhotosData();
   }, []);
 
-  const albumid = albumData.map((item) => item);
-  console.log(albumid, "kkkkkkkkkk");
-  const userObject = usersData.find((user) => user.id === albumid.Id);
-  console.log(userObject, "lllllllllllllll");
+  const userObject = usersData.find((user) => user.id === albumitem.userId);
+  console.log(userObject, "delta");
+
   return (
     <div>
-      <h2>TITLE OF ALBUM</h2>
-      <p>Uploaded By : {usersData.name}</p>
+      <h2>TITLE OF ALBUM :{albumitem.title}</h2>
+      <p>Uploaded By : {userObject.name}</p>
+
       <div className="alb-photo-wrapper">
         {currentRecords.map((item) => {
           return <PhotoList item={item} />;
